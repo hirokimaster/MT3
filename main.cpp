@@ -76,9 +76,16 @@ Matrix4x4 MakeTranslateMatrix(const Vector3& translate) {
 // 変換
 Vector3 Transform(const Vector3& vector, const Matrix4x4& matrix) {
 	Vector3 result;
-	result.x = vector.x * matrix.m[0][0] + vector.y * matrix.m[1][0] + 1.0f * matrix.m[2][0] + 
+	result.x = vector.x * matrix.m[0][0] + vector.y * matrix.m[1][0] + vector.z * matrix.m[2][0] + 1.0f * matrix.m[3][0];
+	result.y = vector.x * matrix.m[0][1] + vector.y * matrix.m[1][1] + vector.z * matrix.m[2][1] + 1.0f * matrix.m[3][1];
+	result.z = vector.x * matrix.m[0][2] + vector.y * matrix.m[1][2] + vector.z * matrix.m[2][2] + 1.0f * matrix.m[3][2];
+	float w = vector.x * matrix.m[0][3] + vector.y * matrix.m[1][3] + vector.z * matrix.m[2][3] + 1.0f * matrix.m[3][3];
+	assert(w != 0.0f);
+	result.x /= w;
+	result.y /= w;
+	result.z /= w;
 
-
+	return result;
 
 }
 
@@ -110,6 +117,21 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		/// ↓更新処理ここから
 		///
 
+		Vector3	translate{ 4.1f, 2.6f,0.8f };
+		Vector3 scale{ 1.5f,5.2f,7.3f };
+		Matrix4x4 translateMatrix = MakeTranslateMatrix(translate);
+		Matrix4x4 scaleMatrix = MakeScaleMatrix(scale);
+		Vector3 point{ 2.3f, 3.8f,1.4f };
+		Matrix4x4 transformMatrix = { 
+			1.0f, 2.0f, 3.0f, 4.0f,
+			3.0f, 1.0f, 1.0f, 2.0f,
+			1.0f, 4.0f, 2.0f, 3.0f,
+			2.0f, 2.0f, 1.0f, 3.0f 
+		};
+
+		Vector3 transformed = Transform(point, transformMatrix);
+
+
 		///
 		/// ↑更新処理ここまで
 		///
@@ -117,6 +139,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		///
 		/// ↓描画処理ここから
 		///
+
+		
+
+
+
+
+
 
 		///
 		/// ↑描画処理ここまで
