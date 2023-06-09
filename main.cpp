@@ -186,7 +186,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		MatrixScreenPrintf(0, kRowHeight, rotateXMatrix, "rotateXMatrix");
 		MatrixScreenPrintf(0, kRowHeight * 6, rotateYMatrix, "rotateYMatrix");
 		MatrixScreenPrintf(0, kRowHeight * 6 * 2, rotateZMatrix, "rotateZMatrix");
-		//MatrixScreenPrintf(0, kRowHeight * 5 * 4, rotateXYZMatrix, "rotateXYZMatrix");
+		MatrixScreenPrintf(0, kRowHeight * 6 * 3, rotateXYZMatrix, "rotateXYZMatrix");
 
 
 
